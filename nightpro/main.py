@@ -96,16 +96,17 @@ def process(inputfolder, starts, outputfile, size, rate):
     if size == DEFAULT_SIZE:
         sizeArg = ''
 
-    CMD = 'ffmpeg {rateArt} {sizeArg} {start} -i {inputfolderArg} -vcodec libx264 -pix_fmt yuv420p {outputfileArg}'
+    CMD = 'ffmpeg {rateArg} {sizeArg} {startArg} {inputfolderArg} -vcodec libx264 -pix_fmt yuv420p {outputfileArg}'
 
     for start in starts:
         cmd = CMD.format(
             rateArg='-r ' + rate,
-            startArg='-start_number' + start,
-            inputfolderArg= '-i {inputFolder}/G00%d.JPG'.format(inputfolder=inputfolder),
+            startArg='-start_number ' + str(start),
+            inputfolderArg= '-i {inputfolder}/G00%d.JPG'.format(inputfolder=inputfolder),
             outputfileArg='{outputfile}-{start}.mp4'.format(outputfile=outputfile,start=start),
             sizeArg=sizeArg
         )
+        print(cmd)
         os.system(cmd)
 
 
