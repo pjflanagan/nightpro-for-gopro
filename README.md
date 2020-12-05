@@ -15,6 +15,15 @@ $ nightpro -i <input_folder> -o <output_name> -s <size> -r <rate>
 ## Installation
 
 ```
+pip install ___
+```
+
+### Maunal
+
+Clone this repository, then run this from the repository's directory.
+
+```
+python3 setup.py install 
 ```
 
 ## ffmpeg

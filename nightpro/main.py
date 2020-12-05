@@ -10,21 +10,21 @@ DEFAULT_OUT = 'nightpro'
 DEFAULT_RATE = '32'
 DEFAULT_SIZE = 'default'
 
-def checkInputFolderArg(inputfolder):
+def _checkInputFolderArg(inputfolder):
     if not os.path.isdir(inputfolder):
         print('folder ({folder}) was not found'.format(folder=inputfolder))
         sys.exit(2)
     return inputfolder
 
 
-def checkSizeArg(size):
+def _checkSizeArg(size):
     # TODO: if size not formatted properly then DEFAULT_SIZE
     if size == 'small':
         return '640x480'
     return size
 
 
-def checkRateArg(rate):
+def _checkRateArg(rate):
     try:
         int(rate)
     except:
@@ -32,7 +32,7 @@ def checkRateArg(rate):
     return rate
 
 
-def readopt(argv):
+def _readopt(argv):
     inputfolder = ''
     outputfile = DEFAULT_OUT
     size = DEFAULT_SIZE
@@ -50,13 +50,13 @@ def readopt(argv):
             print(USAGE_PROMPT)
             sys.exit()
         elif opt in ('-i', '--in'):
-            inputfolder = checkInputFolderArg(arg)
+            inputfolder = _checkInputFolderArg(arg)
         elif opt in ('-o', '--out'):
             outputfile = arg
         elif opt in ('-s', '--size'):
-            size = checkSizeArg(arg)
+            size = _checkSizeArg(arg)
         elif opt in ('-r', '--rate'):
-            rate = checkRateArg(arg)
+            rate = _checkRateArg(arg)
 
     if inputfolder == '':
         print('missing required argument: <input_folder>')
@@ -72,7 +72,7 @@ def readopt(argv):
     return inputfolder, outputfile, size, rate
 
 
-def determineStarts(inputfolder):
+def _determineStarts(inputfolder):
     last = 0
     starts = []
 
@@ -91,7 +91,7 @@ def determineStarts(inputfolder):
     return starts
 
 
-def process(inputfolder, starts, outputfile, size, rate):
+def _process(inputfolder, starts, outputfile, size, rate):
     sizeArg = '-s ' + size
     if size == DEFAULT_SIZE:
         sizeArg = ''
@@ -110,11 +110,10 @@ def process(inputfolder, starts, outputfile, size, rate):
         os.system(cmd)
 
 
-def main(argv):
-    inputfolder, outputfile, size, rate = readopt(argv)
-    starts = determineStarts(inputfolder)
-    process(inputfolder, starts, outputfile, size, rate)
+def main():
+    argv = sys.argv[1:]
+    inputfolder, outputfile, size, rate = _readopt(argv)
+    starts = _determineStarts(inputfolder)
+    _process(inputfolder, starts, outputfile, size, rate)
 
 
-if __name__ == '__main__':
-    main(sys.argv[1:])
