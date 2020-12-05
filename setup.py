@@ -4,14 +4,14 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="example-pkg-YOUR-USERNAME-HERE", # Replace with your own username
+    name="nightpro-USERNAME", # Replace with your own username
     version="0.0.1",
-    author="Example Author",
-    author_email="author@example.com",
-    description="A small example package",
+    author="Peter James Flanagan",
+    author_email="pj@pjflanagan.me",
+    description="A nightlapse maker for GoPro",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
+    url="https://github.com/pjflanagan/nightpro-for-gopro",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
