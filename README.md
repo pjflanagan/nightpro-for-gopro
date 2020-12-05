@@ -15,10 +15,10 @@ $ nightpro -i <input_folder> -o <output_name> -s <size> -r <rate>
 ## Installation
 
 ```
-pip install ___
+pip3 install nightpro-for-gopro
 ```
 
-### Maunal
+### Maunal Installation
 
 Clone this repository, then run this from the repository's directory.
 
