@@ -7,11 +7,10 @@ install:
 clean:
 	rm -rf dist
 	rm -rf build
+	rm -rf nightpro_*.egg-info
 
 # build the program
 build:
-	rm -rf dist
-	rm -rf build
 	python3 setup.py sdist bdist_wheel
 
 # upload using twine
