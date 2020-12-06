@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='nightpro-for-gopro',
-    version='1.0.0',
+    version='1.0.1',
     url='https://github.com/pjflanagan/nightpro-for-gopro',
     author='Peter James Flanagan',
     author_email='pj@pjflanagan.me',

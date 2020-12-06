@@ -4,11 +4,13 @@ import sys
 import getopt
 import re
 
-USAGE_PROMPT = 'usage: nightpro -i <input_folder> [optional: -o <output_name> -s <size> -r <rate>]'
+USAGE_PROMPT = 'usage: nightpro -i <input_folder> -o <output_name> -s <size> -r <rate>'
 
+DEFAULT_IN = '.'
 DEFAULT_OUT = 'nightpro'
 DEFAULT_RATE = '32'
 DEFAULT_SIZE = 'default'
+
 
 def _checkInputFolderArg(inputfolder):
     if not os.path.isdir(inputfolder):
@@ -33,7 +35,7 @@ def _checkRateArg(rate):
 
 
 def _readopt(argv):
-    inputfolder = ''
+    inputfolder = DEFAULT_IN
     outputfile = DEFAULT_OUT
     size = DEFAULT_SIZE
     rate = DEFAULT_RATE
@@ -57,12 +59,6 @@ def _readopt(argv):
             size = _checkSizeArg(arg)
         elif opt in ('-r', '--rate'):
             rate = _checkRateArg(arg)
-
-    if inputfolder == '':
-        print('missing required argument: <input_folder>')
-        print(USAGE_PROMPT)
-        sys.exit(2)
-
 
     print('folder: ' + inputfolder)
     print('out: ' + outputfile)
@@ -102,8 +98,10 @@ def _process(inputfolder, starts, outputfile, size, rate):
         cmd = CMD.format(
             rateArg='-r ' + rate,
             startArg='-start_number ' + str(start),
-            inputfolderArg= '-i {inputfolder}/G00%d.JPG'.format(inputfolder=inputfolder),
-            outputfileArg='{outputfile}-{start}.mp4'.format(outputfile=outputfile,start=start),
+            inputfolderArg='-i {inputfolder}/G00%d.JPG'.format(
+                inputfolder=inputfolder),
+            outputfileArg='{outputfile}-{start}.mp4'.format(
+                outputfile=outputfile, start=start),
             sizeArg=sizeArg
         )
         print(cmd)
@@ -115,5 +113,3 @@ def main():
     inputfolder, outputfile, size, rate = _readopt(argv)
     starts = _determineStarts(inputfolder)
     _process(inputfolder, starts, outputfile, size, rate)
-
-
